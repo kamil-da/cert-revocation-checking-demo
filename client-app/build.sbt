@@ -11,8 +11,16 @@ lazy val demo = (project in file("."))
     resolvers += Resolver.mavenLocal,
     mainClass in assembly := Some("app.ClientApp"),
     assemblyMergeStrategy in assembly := {
-      case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-      case x => MergeStrategy.first
+      case PathList("META-INF", xs @ _*) =>
+        (xs map { _.toLowerCase }) match {
+          case ("manifest.mf" :: Nil) | ("index.list" :: Nil) |
+              ("dependencies" :: Nil) =>
+            MergeStrategy.discard
+          case _ => MergeStrategy.last
+        }
+      case PathList("reference.conf") => MergeStrategy.concat
+      case _                          => MergeStrategy.first
     },
     assemblyJarName in assembly := "client.jar"
   )
+

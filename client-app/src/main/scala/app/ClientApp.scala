@@ -34,7 +34,8 @@ object ClientApp extends App with StrictLogging {
   val caCert = new File(caCertPath)
 
   private val asys: ActorSystem = ActorSystem()
-  private val aesf: AkkaExecutionSequencerPool = new AkkaExecutionSequencerPool("clientPool")(asys)
+  private val aesf: AkkaExecutionSequencerPool =
+    new AkkaExecutionSequencerPool("clientPool")(asys)
   private implicit val ec: ExecutionContext = asys.dispatcher
 
   private def shutdown(): Unit = {
