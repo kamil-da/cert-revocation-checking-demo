@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 OPENSSL="/usr/local/opt/openssl/bin/openssl"
 OPENSSL_CONFIG_TEMPLATE="openssl.template.cnf"
 
-ROOTDIR=$(pwd)
 CERTS_DIR="$ROOTDIR/certs"
 OPENSSL_CONFIG="$CERTS_DIR/openssl.cnf"
 
